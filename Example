@@ -1,0 +1,23 @@
+import matplotlib.pyplot as plt
+
+# Assuming you have two DataFrames 'stock1' and 'stock2' with date and price columns
+# Example:
+# stock1 = pd.read_csv("stock1.csv")
+# stock2 = pd.read_csv("stock2.csv")
+
+# Plotting the stock prices
+plt.figure(figsize=(12, 6))  # Set the figure size
+
+# Plot the price of the first stock
+plt.plot(stock1['date'], stock1['price'], label='Stock 1', color='blue')
+
+# Plot the price of the second stock
+plt.plot(stock2['date'], stock2['price'], label='Stock 2', color='green')
+
+plt.title('Stock Price Comparison')
+plt.xlabel('Date')
+plt.ylabel('Price')
+plt.legend()  # Add a legend to distinguish between the two stocks
+plt.grid(True)  # Add a grid for better readability
+
+plt.show()  # Display the plot
