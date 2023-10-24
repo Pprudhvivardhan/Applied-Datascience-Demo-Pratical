@@ -1,23 +1,60 @@
+ import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
-# Assuming you have two DataFrames 'stock1' and 'stock2' with date and price columns
-# Example:
-# stock1 = pd.read_csv("stock1.csv")
-# stock2 = pd.read_csv("stock2.csv")
+bcs = pd.read_csv("BCS_ann.csv")
+bp= pd.read_csv("BP_ann.csv")
+tsco= pd.read_csv("TSCO_ann.csv")
+vod= pd.read_csv("vod_ann.csv")
 
-# Plotting the stock prices
-plt.figure(figsize=(12, 6))  # Set the figure size
+plt.Figure()
 
-# Plot the price of the first stock
-plt.plot(stock1['date'], stock1['price'], label='Stock 1', color='blue')
+plt.subplot(2, 2, 1)
+plt.hist(bcs["ann_return"], label="Barclays")
 
-# Plot the price of the second stock
-plt.plot(stock2['date'], stock2['price'], label='Stock 2', color='green')
+plt.legend()
+plt.ylabel("N")
+plt.xlabel("returns (%)")
 
-plt.title('Stock Price Comparison')
-plt.xlabel('Date')
-plt.ylabel('Price')
-plt.legend()  # Add a legend to distinguish between the two stocks
-plt.grid(True)  # Add a grid for better readability
+plt.subplot(2, 2, 2)
+plt.hist(bp["ann_return"], label="BP")
+plt.legend()
 
-plt.show()  # Display the plot
+plt.subplot(2, 2, 3)
+plt.hist(tsco["ann_return"], label="TESCO")
+plt.legend()
+plt.xlabel("returns (%)")
+plt.ylabel("N")
+
+plt.subplot(2, 2, 4)
+plt.hist(vod["ann_return"], label="VODAPHONE")
+
+plt.legend()
+plt.xlabel("returns (%)")
+plt.show()
+
+plt.Figure()
+plt.hist(tsco["ann_return"], label="TESCO" , alpha=0.7,density=True)
+
+plt.legend()
+plt.xlabel("returns (%)")
+plt.ylabel("N")
+plt.show()
+
+plt.Figure()
+
+plt.boxplot([bcs["ann_return"], bp["ann_return"], tsco["ann_return"],
+vod["ann_return"]],
+             labels=["Barclays", "BP", "Tesco", "Vodaphone"])
+
+cap = np.array([33367, 68785, 20979, 29741])
+stocks = ["Barclays", "BP", "Tesco", "Vodaphone"]
+
+ftse = 1814000
+cap = cap/ftse
+
+plt.figure()
+plt.pie(cap, labels=stocks, normalize=True)
+plt.show()
+
+print(cap)
